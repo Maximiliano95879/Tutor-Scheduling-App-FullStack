@@ -153,6 +153,27 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+function CarouselContentGrowToFit({ className, ...props }: React.ComponentProps<"div">) {
+  const { carouselRef, orientation } = useCarousel()
+
+  return (
+    <div
+      ref={carouselRef}
+      className="flex flex-1 w-full overflow-hidden"
+      data-slot="carousel-content"
+    >
+      <div
+        className={cn(
+          "flex",
+          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+          className
+        )}
+        {...props}
+      />
+    </div>
+  )
+}
+
 function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   const { orientation } = useCarousel()
 
@@ -235,6 +256,7 @@ export {
   type CarouselApi,
   Carousel,
   CarouselContent,
+  CarouselContentGrowToFit,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
